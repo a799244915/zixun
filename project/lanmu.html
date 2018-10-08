@@ -1,0 +1,121 @@
+
+<script src="./js/lanmu.js"></script>
+<!-- 表单验证 -->
+
+<script>
+	// $(function(){
+	// 	$(".demoform").Validform();
+	// })
+</script>
+<div class="columnMain">
+	<!-- 弹出框 -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button> -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">新增栏目信息</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group demoform">
+            <label for="recipient-name" class="control-label">栏目名称</label>
+            <input type="text" class="form-control" id="recipient-name" >
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">编号</label>
+            <input type="text" class="form-control" id="recipient-number">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">父栏目</label>
+            <input type="text" class="form-control" id="recipient-parent">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">备注</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- 修改弹出框 -->
+<div class="modal fade" id="exampleModal-xiugai" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改栏目信息</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">栏目名称</label>
+            <input type="text" class="form-control" id="revise-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">编号</label>
+            <input type="text" class="form-control" id="revise-number">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">父栏目</label>
+            <input type="text" class="form-control" id="reviseName">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">备注</label>
+            <textarea class="form-control" id="revise-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="reviseSave" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+	<div class="columnContent">
+		
+		<form action="">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增</button>
+			<button type="button" class="btn btn-default dropdown-toggle btns2" data-toggle="dropdown " aria-expanded="false" id="columnbtntwo"  >
+				批量删除
+ 			 </button>
+	
+			<table class="table table-bordered ">
+				<thead>
+					<tr class="1">
+						<td>选择</td>
+						<td>栏目名称</td>
+						<td>描述</td>
+						<td>父栏目</td>
+						<td>编号</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody id="columnTbody">
+					<tr class ="hidden">
+						<td><input type='checkbox'></input></td>
+						<td class="name"></td>
+						<td class="common"></td>
+						<td class="parent"></td>
+						<td class="no"></td>
+						<td class="caozuo"><i class="iconfont icon-xiugai revise" data-toggle="modal" data-target="#exampleModal-xiugai" data-whatever="@mdo"></i>&nbsp&nbsp<i class="iconfont icon-shanchu delete"></i></td>
+					</tr>
+					
+					
+					
+
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>

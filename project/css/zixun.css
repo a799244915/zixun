@@ -1,0 +1,38 @@
+div.zixunMain{
+		padding-top: 23px;
+	}
+	div.zixunContant{
+		background-color: white;
+		height: 750px;
+		width: 900px;
+		margin-left: 45px;
+		
+	}
+	div.zixunContant button{
+		width: 70px;
+		height: 30px;
+		background-color: #66B90F;
+		margin:10px;
+		text-align: center;
+	}
+	div.zixunContant button.btns2{
+		width: 80px;
+	}
+	div.zixunContant form table{
+		margin:10px;
+		width:850px; 
+	}
+	div.zixunContant form table tr td{
+		height: 40px;
+		text-align: center;
+	}
+	div.zixunContant form table tr td:nth-child(2),td:nth-child(6){
+		width: 150px;
+	}
+	.zixunHidden{
+		display:none;
+	}
+	tbody tr td i{
+		font-size: 20px;
+		cursor:pointer;
+	}

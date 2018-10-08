@@ -1,0 +1,76 @@
+div.mainbody{
+			padding-left:15%;
+		}
+		div.main>div.col-lg-3{
+			height:900px;
+			background-color: #282830;
+			width: 200px;
+			color: white;
+		}
+		div.main>div.col-lg-3 div.nav{
+			height: 50px;
+			background-color:#3D556D;
+			text-align: center;
+			line-height: 50px;
+
+
+		}
+		div.main >div.col-lg-3 ul{
+			margin-top: 50px;
+			list-style: none;
+			margin-left: -20px;
+			letter-spacing: 2px;
+
+		}
+		div.main>div.col-lg-3 ul li{
+			border-bottom: 1px solid #333333;
+			margin-top: 5px;
+			cursor:pointer;
+		}
+		div.main div.col-lg-9{
+			height: 900px;
+			
+			width: 1000px;
+		}
+		#neirong{
+				
+				/*background-color: yellow;*/
+				height: 800px;
+				width: 1000px;
+				background-color: #EEEEEE;
+				margin-left: -15px;
+				box-sizing: border-box;
+		}
+		div.main>div.col-lg-9 div.top .col-lg-10{
+			background-color: #FFFFFF;
+				height: 50px;
+			border:1px solid #F0F0F0;
+			border-right: 0px;
+		}
+		div.main>div.col-lg-9 div.top .col-lg-10 span{
+			line-height: 50px;
+
+		}
+		div.main>div.col-lg-9 div.top .col-lg-10 span i{
+			font-size: 30px;
+			margin-left: 20px;
+		}
+		div.main>div.col-lg-9 div.top .col-lg-2{
+			background-color: #FFFFFF;
+				height: 50px;
+				border:1px solid #F0F0F0;
+				border-left: 0px;
+				text-align: center;
+		}
+		div.main>div.col-lg-9 div.top .col-lg-2 span{
+			line-height: 50px;
+		}
+		div.main>div.col-lg-9 div.top .col-lg-2 div{
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			border: 1px solid black;
+			margin-top: 10px;
+			float: left;
+		}

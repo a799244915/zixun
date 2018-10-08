@@ -1,0 +1,179 @@
+<script>
+	$(function(){
+		// 获取数据
+				function load(){
+					var form={
+						page:14,
+						pageSize:10,
+					}
+					$.get("http://120.78.164.247:8099/manager/article/findArticle",form,function(result){
+								Array.prototype.slice.call(result.data.list,0).forEach(function(item){
+									
+								
+									var $trclone=$(".zixunHidden").clone(true);
+							
+
+								
+									$trclone.children()[0].name=item.id;
+									$trclone.children()[1].innerHTML=item.title;
+
+									// 获取父栏目
+									$.get("http://120.78.164.247:8099/manager/category/findAllCategory",function(result){
+
+										Array.prototype.slice.call(result.data,0).forEach(function(item){
+											console.log(item)
+											
+											
+												$trclone.children()[2].innerHTML=item.parent.name;
+										
+											
+											// $trclone.children()[3].innerHTML=item.parent;
+											})
+										})
+									// 
+
+									if (item.music==null) {
+												$trclone.children()[3].innerHTML="无";
+											}else{
+												$trclone.children()[3].innerHTML=item.music;
+											}
+									$trclone.children()[4].innerHTML="xiao";
+									$trclone.children()[5].innerHTML=item.publishtime;
+									$trclone.children()[6].innerHTML=item.readtimes;
+									$trclone.removeAttr("class");
+									$("tbody").append($trclone);
+									})
+					});
+				}
+				load();
+
+		// 多个删除
+				$(".zixunDelete").click(function(){
+							   var msg = "确认删除吗?";
+						            if (confirm(msg)==true){
+						                Array.prototype.slice.call($("input"),0).forEach(function(item){
+						                	// console.log(item.parentNode)
+												if (item.checked) {
+													var obj={};
+													obj.id=item.parentNode.name
+													console.log(item.parentNode.name)
+							            		$("tbody")[0].removeChild(item.parentNode.parentNode);
+												$.get("http://120.78.164.247:8099/manager/article/deleteArticleById",obj)
+									       
+												}
+											})
+						                return true;
+						            }else{
+						            	$("input").removeAttr("checked")
+						                return false;
+						            }
+
+						   // 刷新页面
+						     $(" tbody tr[class!='zixunHidden']").remove();
+							load();
+							
+				})
+		// 
+
+
+		// 单个删除
+		$("tr").on('click','.delete',function (){
+					 var msg = "确认删除吗?";
+				            if (confirm(msg)==true){
+				                	 $(this).parent().parent().remove()
+				                    console.log($(this).parent().parent().children()[0].name)
+				                    var obj={};
+									obj.id=$(this).parent().parent().children()[0].name;
+									$.get("http://120.78.164.247:8099/manager/article/deleteArticleById",obj)
+									// 刷新
+									$(" tbody tr[class!='zixunHidden']").remove();
+									load();
+								    return true;
+				            }else{
+				 
+				                return false;
+				            }
+
+                });
+		// 
+
+
+		// 修改数据
+
+	})
+</script>
+<div class="zixunMain">
+	<div class="zixunContant">
+		<form action="">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增</button>
+			<button type="button" class="btn btn-default dropdown-toggle btns2 zixunDelete" data-toggle="dropdown" aria-expanded="false">
+				批量删除
+ 			 </button>
+
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<td>编号</td>
+						<td>文章题目</td>
+						<td>所属栏目</td>
+						<td>背景音乐</td>
+						<td>作者</td>
+						<td>发布时间</td>
+						<td>阅读次数</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="zixunHidden">
+						<td><input type="checkbox"></input></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="caozuo"><i class="iconfont icon-xiugai revise" data-toggle="modal" data-target="#exampleModal-xiugai" data-whatever="@mdo"></i>&nbsp&nbsp<i class="iconfont icon-shanchu delete"></i></td>
+					</tr>	
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
+
+<!-- 弹出框 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">新增栏目信息</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group demoform">
+            <label for="recipient-name" class="control-label">栏目名称</label>
+            <input type="text" class="form-control" id="recipient-name" >
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">编号</label>
+            <input type="text" class="form-control" id="recipient-number">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">父栏目</label>
+            <input type="text" class="form-control" id="recipient-parent">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">备注</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->

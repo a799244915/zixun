@@ -1,0 +1,31 @@
+.shouye-top-left>div{
+		background-color:pink;
+		width: 200px;
+		height: 80px;
+		margin:20px;
+	}
+	.shouye-top-middle>div{
+		height: 280px;
+		margin: 20px;
+		background-color: lightblue;
+	}	
+	.shouye-top-right>div{
+		margin:20px;
+		width: 180px;
+		height: 130px;
+		background-color: yellow;
+	}
+	.shouye-middle div:first-child{
+		width: 400px;
+		
+		height: 510px;
+		/*margin:20px;*/
+		float: left;
+	}
+	.shouye-middle div:last-child{
+		width: 520px;
+		
+		height: 510px;
+		float: left;
+		margin-left:60px;
+	}

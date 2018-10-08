@@ -1,0 +1,57 @@
+	div.columnMain{
+		padding-top: 23px;
+	}
+	div.columnContent{
+		background-color: white;
+		height: 750px;
+		width: 900px;
+		margin-left: 45px;
+		
+	}
+	div.columnContent button{
+		width: 70px;
+		height: 30px;
+		background-color: #66B90F;
+		margin:10px;
+		text-align: center;
+	}
+	div.columnContent button.btns2{
+		width: 80px;
+	}
+	div.columnContent form table{
+		margin:10px;
+		width:850px; 
+	}
+	div.columnContent form table tr{
+		border: 1px solid #eeeeee;
+	}
+	div.columnContent form table tr td{
+		height: 40px;
+		text-align: center;
+	}
+
+	div.columnContent form table tr td:nth-child(4){
+		width: 300px;
+	}
+	div.alertText{
+		display: none;
+		
+	}
+	div.alertTextStyle{
+		position: absolute;
+		float: right;
+	}
+	div.modal-dialog{
+		width: 400px;
+		/*height: 80px;*/
+	}
+	#lanmuName{
+		width: 800px;
+	}
+	#columnTbody tr td i{
+		font-size: 20px;
+		cursor:pointer;
+	}
+	.hidden{
+		display:none;	
+	}

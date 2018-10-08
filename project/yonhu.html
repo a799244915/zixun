@@ -1,0 +1,290 @@
+<script>
+	$(function(){
+		function userGET(){
+			var $clone=$(".hidden").clone();
+			$.get("http://120.78.164.247:8099/manager/user/findAllUser",function(result){
+				Array.prototype.slice.call(result.data,0).forEach(function(item){
+					var $clone=$(".hidden").clone(true);
+					$clone.children().children()[0].src=item.userface;
+					// $("clone .name").innerHTML=item.nickname;
+					$clone.children().children().children().children()[1].innerHTML=item.nickname;
+					$clone.children().children().children().children()[3].innerHTML=item.username;
+					$clone.children().children().children().children()[5].innerHTML=item.password;
+					$clone.children().children().children().children()[7].innerHTML=item.email;
+					$clone.children().children().children().children()[9].name=item.id;
+					$clone.children().children().children().children()[11].name=item.id;
+					if(item.enabled==true){
+						$clone.children().children().children().children().children()[0].checked=true
+					}
+					$clone.removeAttr("class");
+					$(".hiddenParent").append($clone);
+				});
+			})
+		}
+			userGET();
+		// 多个删除
+			$(".userDelete").click(function(){
+					   var msg = "确认删除吗?";
+				            if (confirm(msg)==true){
+				                Array.prototype.slice.call($("input"),0).forEach(function(item){			
+										if (item.checked) {
+											var obj={};
+											obj.id=item.parentNode.name
+					            		$(".hiddenParent")[0].removeChild(item.parentNode.parentNode.parentNode.parentNode.parentNode);
+										$.get("http://120.78.164.247:8099/manager/user/deleteUserById",obj)
+							       
+										}
+									})
+				                return true;
+				            }else{
+				            	$("input").removeAttr("checked")
+				                return false;
+				            }
+
+				   // 刷新页面
+
+				     $("form li[class!='hidden']").remove();
+						userGET();
+					
+				})
+		// 
+
+		// 单个删除
+					$("td").on('click','.userOnceDelete',function (){
+								 var msg = "确认删除吗?";
+							            if (confirm(msg)==true){
+							            
+							                    $(this).parent().parent().parent().parent().parent().remove();
+							                    console.log($(this).parent()[0].name)
+							                    var obj={};
+												obj.id=$(this).parent()[0].name;
+												$.get("http://120.78.164.247:8099/manager/user/deleteUserById",obj)
+												// 刷新
+											    return true;
+							            }else{
+							 
+							                return false;
+							            }
+			                });
+		// 
+
+		// 添加
+			$("#save").click(function(){
+			var obj ={};
+			obj.nickname=$("#UserNickName")[0].value;
+			obj.username=$("#UserRealName")[0].value;
+			obj.password=$("#UserPsw")[0].value;
+			obj.email=$("#UserEmail")[0].value;
+			// obj.userface=$("UserImg")[0].value;
+			console.log($("#UserImg")[0].file)
+			// obj.
+			// console.log(obj)
+			// $.post("http://120.78.164.247:8099/manager/user/saveOrUpdateUser",obj);
+			// $.post("",)
+			// 刷新页面
+			   $("form li[class!='hidden']").remove();
+						userGET();
+
+
+		})
+
+		// 
+
+		// 修改
+					$(".xiugai").click(function(){
+							console.log($(this).parent().parent().parent().children().children()[1].innerHTML);
+							console.log($("#reviseNickName")[0].value)
+							// console.log($(this).parent().parent().children()[1].name)
+						var obj={};
+                    	obj.id=$(this).parent().parent().children()[1].name;
+                    	$("#reviseNickName")[0].value=$(this).parent().parent().parent().children().children()[1].innerHTML;
+						$("#reviseRealName")[0].value=$(this).parent().parent().parent().children().children()[3].innerHTML;
+						$("#revisePsw")[0].value=$(this).parent().parent().parent().children().children()[5].innerHTML;
+						$("#reviseUserEmail")[0].value=$(this).parent().parent().parent().children().children()[7].innerHTML;
+
+
+
+						$("#reviseSave").click(function(){
+								obj.nickname=$("#reviseNickName")[0].value;
+								obj.username=$("#reviseRealName")[0].value;
+								obj.password=$("#ConformUserPsw")[0].value;
+								obj.email=$("#reviseUserEmail")[0].value;
+								$.post("http://120.78.164.247:8099/manager/user/saveOrUpdateUser",obj);
+						//刷新页面	
+						 $("form li[class!='hidden']").remove();
+							userGET();
+					  })
+					});		
+					// 改变勾选
+						
+						$("input").click(function(){
+							Array.prototype.slice.call($("input"),0).forEach(function(item){			
+										if (item.checked) {
+											var obj={};
+											obj.id=item.parentNode.name
+											obj.status=true;
+					            		// 	
+										$.post("http://120.78.164.247:8099/manager/user/changeStatus",obj)
+							       
+										}else{
+											var obj={};
+											obj.id=item.parentNode.name
+											obj.status=false;
+					            		// 	
+										$.post("http://120.78.164.247:8099/manager/user/changeStatus",obj)
+										}
+									})
+						});
+									
+			// 			
+		// 
+
+	})
+</script>
+
+
+<div class="yonhuMain">
+	<div class="yonhuContent">
+		<form action="">
+			<button type="button" class="btn btn-primary addUser" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增</button>
+ 			 <button type="button" class="btn btn-default dropdown-toggle  userDelete" data-toggle="dropdown" aria-expanded="false" style="width:100px">
+				全部删除
+ 			 </button>
+ 		<ul class="hiddenParent">
+ 			<li  class="hidden">
+ 				<div class="face"><img src="" alt=""></div>
+ 				<table class="table">
+ 					<tbody>
+ 						<tr>
+ 							<td>用户名</td>
+ 							<td class="name"></td>
+ 						</tr>
+ 						<tr>
+ 							<td>真实姓名</td>
+ 							<td class="trueName"></td>
+ 						</tr>
+ 						<tr>
+ 							<td>密码</td>
+ 							<td class="tel"></td>
+ 						</tr>
+ 						<tr>
+ 							<td>email</td>
+ 							<td char="mail"></td>
+ 						</tr>
+ 						
+ 						<tr>
+ 							<td>选用</td>
+ 							<td class="checkboxId ">
+								<input type="checkbox">
+							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 							<button type="button" class="btn btn-default dropdown-toggle xiugai" data-toggle="modal" aria-expanded="false" data-target="#UseXiugai" data-whatever="@mdo">
+								修改
+				 			 </button>
+				 			 </td>
+ 							<td>
+								<button type="button" class="btn btn-default dropdown-toggle  userOnceDelete" data-toggle="dropdown" aria-expanded="false">
+								删除
+				 			   </button>
+							</td>
+ 						</tr>
+ 					</tbody>
+ 				</table>
+ 			</li>
+ 		</ul>
+		</form>
+
+	</div>
+</div>
+
+<!-- 修改弹出框 -->
+<div class="modal fade" id="UseXiugai" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改用户</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group demoform">
+            <label for="recipient-name" class="control-label">昵称</label>
+            <input type="text" class="form-control" id="reviseNickName" >
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">真实姓名</label>
+            <input type="text" class="form-control" id="reviseRealName">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">密码</label>
+            <input type="text" class="form-control" id="revisePsw">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">确认密码</label>
+            <input type="text" class="form-control" id="ConformUserPsw">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">邮箱</label>
+            <input type="text" class="form-control" id="reviseUserEmail">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">上传头像</label>
+            <input type="file" class="form-control" id="UserImg">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="reviseSave" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!-- 新增弹出框 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">添加用户</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group demoform">
+            <label for="recipient-name" class="control-label">昵称</label>
+            <input type="text" class="form-control" id="UserNickName" >
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">真实姓名</label>
+            <input type="text" class="form-control" id="UserRealName">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">密码</label>
+            <input type="text" class="form-control" id="UserPsw">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">确认密码</label>
+            <input type="text" class="form-control" id="ConformUserPsw">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">邮箱</label>
+            <input type="text" class="form-control" id="UserEmail">
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" class="control-label">头像</label>
+            <input type="file" class="form-control" id="UserImg">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
